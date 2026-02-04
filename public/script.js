@@ -1,5 +1,3 @@
-// script.js (Vercel + Local compatible)
-
 async function findCareers() {
     const interest = document.getElementById("interest").value;
     const budget = document.getElementById("budget").value;
@@ -7,16 +5,17 @@ async function findCareers() {
 
     resultsDiv.innerHTML = "Searching...";
 
-    // ✅ AUTO detect environment
     const API_BASE_URL =
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1"
-            ? "http://127.0.0.1:5000"   // Local Flask
-            : "https://testing-backend-if7h.onrender.com"; // Production Flask
+            ? "http://127.0.0.1:5000"
+            : "https://testing-backend-if7h.onrender.com";
 
     try {
         const response = await fetch(
-            `${API_BASE_URL}/api/careers?interest=${encodeURIComponent(interest)}&budget=${budget}`
+            `${API_BASE_URL}/api/careers?interest=${encodeURIComponent(
+                interest
+            )}&budget=${budget}`
         );
 
         if (!response.ok) {
@@ -40,7 +39,6 @@ async function findCareers() {
                 </div>
             `;
         });
-
     } catch (error) {
         console.error(error);
         resultsDiv.innerHTML = "Server error. Please try again later.";
